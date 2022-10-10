@@ -1,9 +1,11 @@
 <template>
-  <CRow >
-    <CCol  :key="index" v-for="(category, index) in categories">
-        {{category}}
-    </CCol>
-  </CRow>
+  <div >
+    <div :key="index" v-for="(category, index) in categories">
+        <p  style="width: fit-content;">
+          {{category }} 
+        </p>
+      </div>
+    </div>
 </template>
 
 <script>

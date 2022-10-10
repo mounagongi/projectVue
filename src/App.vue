@@ -12,18 +12,18 @@ import HelloWorld from './components/HelloWorld.vue'
       <!-- <HelloWorld msg="You did it!" /> -->
       <CContainer>
   <CRow >
-    <CCol xs="4">
-      <div class="wrapper">
+    
+      <div class="wrapper" >
       <nav style="margin-bottom:10px">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/entries">Entries</RouterLink>
+        <RouterLink to="/">Entries</RouterLink>
+        <RouterLink to="/categories">Categories</RouterLink>
+        
       </nav>
     </div>
-    </CCol>
-    <CCol xs="8">
+    
+    
   <RouterView />
-    </CCol>
+    
       </CRow>
       </CContainer>
   
@@ -45,7 +45,7 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 16px;
   text-align: center;
   margin-top: 1rem;
 }
@@ -83,12 +83,13 @@ nav a:first-of-type {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+   
   }
 
   nav {
     text-align: left;
     margin-left: -1rem;
-    font-size: 1rem;
+    font-size: 2rem;
 
     padding: 1rem 0;
     margin-bottom: 2rem;
