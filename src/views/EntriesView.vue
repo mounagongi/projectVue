@@ -1,14 +1,20 @@
 <template>
     <div class="me-0">
-     
-      <input type="text" placeholder="Search by title..." v-model="searchQuery" />
-      <!-- <font-awesome-icon icon="fa-solid fa-magnifying-glass" /> -->
+      <div class="d-flex justify-content-between">
+     <div class="d-flex align-items-center">
+      <input 
+      type="search" 
+      class=" form-control me-2"
+      style="width: min-content;"
+       placeholder="Search by title..." v-model="searchQuery" />
+      <font-awesome-icon icon="fa-solid fa-magnifying-glass" color="gray" />
+       </div>
       <button v-on:click="filterFnt"  style="margin-left:10px" class="btn btn-primary btn-sm">
         Filter By Category
         <font-awesome-icon icon="fa-solid fa-angle-up" v-if=" filterCateg"/>
         <font-awesome-icon icon="fa-solid fa-angle-down" v-if="!filterCateg"/>
       </button>
-  
+ </div>
       <div class="row"  style="margin-top:10px;" v-if="filterCateg">
        
     <div class="col" style="min-width: fit-content;" :key="index" v-for="(category, index) in categories">
@@ -31,16 +37,8 @@
       </div>
      
 
-      <b-container  v-if="filteredEntries?.length >0" class="p-0 m-0">
-        <b-pagination
+      <div  v-if="filteredEntries?.length >0" class="p-0 mx-0">
         
-        class="mt-4"
-      v-model="currentPage"
-      pills :total-rows="rows" align="end"
-      :per-page="perPage"
-      aria-controls="my-table"
-      
-    ></b-pagination>
         <!-- <b-table 
         hover 
         class="table-bordered rounded-2 mt-2"
@@ -51,25 +49,34 @@
         :fields="fields"
       ></b-table> -->
        
-      <div class="table-responsive  rounded-2 mt-3">
+      <div class="table-responsive rounded-2 mt-3">
       <table 
-          class="table align-middle table-bordered table-hover mt-0" 
+          class="table align-middle  table-hover mt-0" 
           v-if="filteredEntries?.length >0" 
-          style="margin-top:10px">
+          >
 <thead>
-    <tr class=" " style="background-color: #e6e8f2; ">
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Category</th>
-      <th scope="col">Link</th>
-      <th scope="col">HTTPS</th>
+    <tr  style="background-color: #e6e8f2;" >
+      <th scope="col" class="py-0 fw-bolder">#</th>
+      <th scope="col" class="py-0 fw-bolder" >Title</th>
+      <th scope="col" class="py-0 fw-bolder">Category</th>
+      <th scope="col" class="py-0 fw-bolder" style="min-width: 100px;">Link</th>
+      <th scope="col" class="py-0 fw-bolder" >HTTPS</th>
     </tr>
   </thead>
   <tbody>
  
-   <tr :key="index" v-for="(entry, index) in filteredEntries">
+   <tr :key="index" v-for="(entry, index) in filteredEntries" >
       <td scope="row">{{index+1}}</td>
-      <td><a href="#" @click="getDetails(entry)">{{entry['API']}}</a></td>
+      <td><div class="d-flex align-items-sm-center" href="#" @click="getDetails(entry)">
+        <div class="symbol symbol-50px">
+                        <div class="symbol-label bg-light rounded-2 px-3 py-0 me-2">
+                          <span class="text-dark" style="word-break: break-word; font-weight: 500; font-size: 1.5rem">
+                            {{entry['API'][0].toUpperCase()}}
+                          </span>
+                        </div>
+                      </div>
+                      <button type="button" class="btn btn-link" >{{entry['API']}}</button>
+      </div></td>
       <td>{{entry['Category']}}</td>
       <td>{{entry['Link']}}</td>
       <td>{{entry['HTTPS']}}</td>
@@ -78,14 +85,28 @@
 </tbody>
       </table>
       </div>
-
-      </b-container>
+      <b-pagination
+        
+        class="mt-4"
+      v-model="currentPage"
+      pills :total-rows="rows" align="center"
+      :per-page="perPage"
+      aria-controls="my-table"
+      
+    ></b-pagination>
+    </div>
       <div  v-if="filteredEntries?.length == 0" class ="bg-danger text-white rounded-2 mt-4 px-3">
       no entry found !!
       </div>
-      <div  v-if="filteredEntries == null " style="margin-top:10px" >
-        <font-awesome-icon icon="fa-solid fa-rotate" size="lg"/>
+      <br/>
+      <div v-if="filteredEntries == null " class="d-flex justify-content-center">
+      <div  class="spinner-border text-primary mt-5" style="width: 2rem; height: 2rem;" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
+    </div>
+      <!-- <div  v-if="filteredEntries == null " style="margin-top:10px" >
+        <font-awesome-icon icon="fa-solid fa-rotate" size="lg"/>
+      </div> -->
     
     </div>
   </template>

@@ -14,18 +14,18 @@ const router = createRouter({
       path: '/',
       name: 'entries',
       component: () => import('../views/EntriesView.vue'),
+      // children: [
+      //      {
+      //        path: '/:title',
+      //        component: () => import('../views/Details.vue'),
+      //     }
+      //   ],
       
     },
     {
       path: '/entry/:title',
       name: 'entry',
       component: () => import('../views/Details.vue'),
-      // children: [
-      //   {
-      //     path: 'details',
-      //     component: () => import('../views/Details.vue'),
-      //   }
-      // ],
     }
   ]
 })
